@@ -1,0 +1,78 @@
+grammar org.xtext.example.mydsl2.MML with org.eclipse.xtext.common.Terminals
+
+generate mML "http://www.xtext.org/example/mydsl2/MML"
+
+
+Traitement:
+	'file' chemin = STRING
+	'evaluation' eval = StratEval
+	'algorithm' algo = Algorithm
+	('varCible' name = Variable)?
+	('varPredictives' names += Variable*)?
+;
+
+
+Variable : // on peut redéfinir le nom des variables
+	name =INT
+;
+
+Algorithm :
+	'{'
+	'languageAlgo' lang = Lang
+	'nameAlgo' name = (SVM|Tree) 
+	'}'
+;
+
+
+enum Lang: //remplacer par enum
+	python="Python"| R="R"
+;
+
+
+
+StratEval:
+	name = CrossValidation|TrainingTest
+;
+
+CrossValidation:
+	'CrossValidation' '{'
+	'numRepetitionCross' number = INT
+	'}'
+;
+
+TrainingTest:
+	'TrainingTest' '{'
+	'pourcentageTraining' number = INT
+	'}'
+;
+
+SVM: 'SVM' '{'
+	'kernelSVM' type = SVMKernel
+	('typeSVM' name = SVMType)?
+	'}'
+;
+
+enum SVMKernel:
+	linear='linear'|poly='polynomial'|radial='radial'
+;
+
+enum SVMType:
+	cClass= "C-classification" | nuClass ="nu-classification" | oneClass="one-classification"
+;
+
+
+Tree: 'Tree' '{'
+	'methodTree' type = Treetype
+	'}'
+;
+
+enum Treetype:
+	class= "class"|anova= "anova"
+;
+
+
+//ecrire des programmes dans notre grammaire
+//jouer le role du compilateur
+//essayer d'écrire des petits programmes dans notre langage pour voir s'il est assez expressif.
+
+//fin d'aprem : on écrira le compilateur

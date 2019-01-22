@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mML" nsURI="http://www.xtext.org/example/mydsl2/MML" nsPrefix="mML">
+  <eClassifiers xsi:type="ecore:EClass" name="Traitement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="chemin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eval" eType="#//StratEval"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="algo" eType="#//Algorithm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//Variable"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="names" upperBound="-1"
+        eType="#//Variable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Algorithm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lang" eType="#//Lang"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Lang">
+    <eLiterals name="python" literal="Python"/>
+    <eLiterals name="R" value="1" literal="R"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StratEval">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//CrossValidation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CrossValidation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrainingTest" eSuperTypes="#//StratEval">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SVM">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//SVMKernel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//SVMType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SVMKernel">
+    <eLiterals name="linear" literal="linear"/>
+    <eLiterals name="poly" value="1" literal="polynomial"/>
+    <eLiterals name="radial" value="2" literal="radial"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SVMType">
+    <eLiterals name="cClass" literal="C-classification"/>
+    <eLiterals name="nuClass" value="1" literal="nu-classification"/>
+    <eLiterals name="oneClass" value="2" literal="one-classification"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tree">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//Treetype"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Treetype">
+    <eLiterals name="class" literal="class"/>
+    <eLiterals name="anova" value="1" literal="anova"/>
+  </eClassifiers>
+</ecore:EPackage>
